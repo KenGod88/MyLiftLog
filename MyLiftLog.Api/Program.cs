@@ -13,6 +13,13 @@ namespace MyLiftLog.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAuthentication()
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.Authority = "https://localhost:5001";
+                    options.TokenValidationParameters.ValidateAudience = false;
+                });
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 
@@ -22,6 +29,8 @@ namespace MyLiftLog.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+
 
             app.UseHttpsRedirection();
 
