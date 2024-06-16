@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace MyLiftLog.Data.Models
 {
-    internal class ExerciseMuscleGroup
+    public class ExerciseMuscleGroup
     {
+        public Guid Id { get; set; }
+
+        public Guid ExerciseId { get; set; }
+        public Exercise Exercise { get; set; }
+
+        public Guid MuscleGroupId { get; set; }
+        public MuscleGroup MuscleGroup { get; set; }
     }
 }
