@@ -1,0 +1,101 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using MyLiftLog.Data.Context;
+using MyLiftLog.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyLiftLog.Data.Store
+{
+    public class WorkoutStore : IWorkoutStore
+    {
+        private readonly ApplicationDbContext _context;
+
+        public WorkoutStore(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
+        public async Task<ActionResult<Workout>> CreateWorkout(Workout workout)
+        {
+            _context.Workouts.Add(workout);
+            await _context.SaveChangesAsync();
+
+            return new ActionResult<Workout>(workout);
+            
+            
+        }
+
+        public async Task<ActionResult<Workout>> DeleteWorkout(Guid id)
+        {
+            var workout = await _context.Workouts.FindAsync(id);
+            if (workout == null)
+            {
+                return new NotFoundResult();
+            }
+
+            _context.Workouts.Remove(workout);
+            await _context.SaveChangesAsync();
+
+            return new ActionResult<Workout>(workout);
+
+            
+        }
+
+        public async Task<ActionResult<IEnumerable<Workout>>> GetAllWorkouts()
+        {
+            return await _context.Workouts.ToListAsync();
+        }
+
+        public async Task<ActionResult<Workout>> GetWorkout(Guid id)
+        {
+            var workout = await _context.Workouts.FindAsync(id);
+
+            if (workout == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return workout;
+        }
+
+        public async Task<ActionResult<Workout>> UpdateWorkout(Guid id, Workout workout)
+        {
+            if (id != workout.Id)
+            {
+                return new BadRequestResult();
+            }
+
+            _context.Entry(workout).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!WorkoutExists(id))
+                {
+                    return new NotFoundResult();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return new ActionResult<Workout>(workout);
+        }
+
+
+        public bool WorkoutExists(Guid id)
+        {
+            return _context.Workouts.Any(e => e.Id == id);
+        }
+    }
+}

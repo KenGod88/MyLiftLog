@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyLiftLog.Data.Context;
+using MyLiftLog.Data.Store;
 using MyLiftLog.IdentityServer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +34,8 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("scope", "MyLiftLog.Api");
     });
 });
+
+builder.Services.AddScoped<IWorkoutStore, WorkoutStore>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
