@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyLiftLog.Data", "MyLiftLog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyLiftLog.Api", "MyLiftLog.Api\MyLiftLog.Api.csproj", "{8BF60547-1CFD-45CA-ACB9-8EFC9447AC1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLiftLog.IdentityServer", "MyLiftLog.IdentityServer\MyLiftLog.IdentityServer.csproj", "{7D754340-5D48-45E6-A04F-5EA90FBA7BC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{8BF60547-1CFD-45CA-ACB9-8EFC9447AC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BF60547-1CFD-45CA-ACB9-8EFC9447AC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BF60547-1CFD-45CA-ACB9-8EFC9447AC1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D754340-5D48-45E6-A04F-5EA90FBA7BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D754340-5D48-45E6-A04F-5EA90FBA7BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D754340-5D48-45E6-A04F-5EA90FBA7BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D754340-5D48-45E6-A04F-5EA90FBA7BC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
