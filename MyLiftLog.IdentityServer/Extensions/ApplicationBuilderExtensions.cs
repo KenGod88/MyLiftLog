@@ -20,6 +20,7 @@
 
             app.UseIdentityServer();
             app.UseAuthorization();
+            app.MapRazorPages().RequireAuthorization();
 
             app.MapDefaultControllerRoute();
 
