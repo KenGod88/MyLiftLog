@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace MyLiftLog.Data.Models
 {
-    public class MuscleGroup
+    public enum MuscleGroup
     {
-        [Key]
-        public Guid Id { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
-        public ICollection<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; }
+        Chest,
+        Legs,
+        Back,
+        Arms,
+        Shoulders,
+        Core
     }
 }

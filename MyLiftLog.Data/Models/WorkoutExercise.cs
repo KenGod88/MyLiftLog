@@ -22,6 +22,6 @@ namespace MyLiftLog.Data.Models
 
         public Exercise Exercise { get; set; }
 
-        public ICollection<Set> Sets { get; set; }
+        public List<Set> Sets { get; set; }
     }
 }

@@ -15,9 +15,14 @@ namespace MyLiftLog.Data.Models
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+
         public string Description { get; set; }
-        public ICollection<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; }
-        public ICollection<WorkoutExercise> WorkoutExercises { get; set; }
+
+       
+        public MuscleGroup MuscleGroup { get; set; }
+
+
+        public List<WorkoutExercise> WorkoutExercises { get; set; }
 
     }
 }

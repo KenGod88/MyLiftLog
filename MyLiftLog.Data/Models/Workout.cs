@@ -15,6 +15,6 @@ namespace MyLiftLog.Data.Models
         [Required]
         public DateTime Date { get; set; }
         public string Notes { get; set; }
-        public ICollection<WorkoutExercise> WorkoutExercises { get; set; }
+        public List<WorkoutExercise> WorkoutExercises { get; set; }
     }
 }

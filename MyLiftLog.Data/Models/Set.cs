@@ -13,7 +13,8 @@ namespace MyLiftLog.Data.Models
         public Guid Id { get; set; }
 
         [Required]
-        public Guid WorkoutExersiceId { get; set; }
+        public Guid WorkoutExerciseId { get; set; }  
+
         public WorkoutExercise WorkoutExercise { get; set; }
 
         public int Reps { get; set; }
