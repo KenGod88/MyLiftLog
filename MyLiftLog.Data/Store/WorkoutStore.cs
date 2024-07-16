@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyLiftLog.Data.Context;
 using MyLiftLog.Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyLiftLog.Data.Store
@@ -49,7 +47,8 @@ namespace MyLiftLog.Data.Store
 
         public async Task<ActionResult<IEnumerable<Workout>>> GetAllWorkouts()
         {
-            return await _context.Workouts.ToListAsync();
+            var workouts = await _context.Workouts.ToListAsync();
+            return new ActionResult<IEnumerable<Workout>>(workouts);
         }
 
         public async Task<ActionResult<Workout>> GetWorkout(Guid id)
