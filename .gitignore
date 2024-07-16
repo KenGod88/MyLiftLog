@@ -363,3 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 /MyLiftLog.IdentityServer/keys
 /MyLiftLog.Data/Migrations
+/MyLiftLog.Data/myliftlog.db
+/MyLiftLog.Data/myliftlog.db-shm
+/MyLiftLog.Data/myliftlog.db-wal
+/MyLiftLog.Api/appsettings.json
