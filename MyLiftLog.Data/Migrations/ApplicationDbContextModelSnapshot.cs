@@ -153,6 +153,9 @@ namespace MyLiftLog.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("MuscleGroup")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -161,43 +164,6 @@ namespace MyLiftLog.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Exercises");
-                });
-
-            modelBuilder.Entity("MyLiftLog.Data.Models.ExerciseMuscleGroup", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("ExerciseId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("MuscleGroupId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExerciseId");
-
-                    b.HasIndex("MuscleGroupId");
-
-                    b.ToTable("ExerciseMuscleGroups");
-                });
-
-            modelBuilder.Entity("MyLiftLog.Data.Models.MuscleGroup", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MuscleGroups");
                 });
 
             modelBuilder.Entity("MyLiftLog.Data.Models.Set", b =>
@@ -212,12 +178,12 @@ namespace MyLiftLog.Data.Migrations
                     b.Property<double>("Weight")
                         .HasColumnType("REAL");
 
-                    b.Property<Guid>("WorkoutExersiceId")
+                    b.Property<Guid>("WorkoutExerciseId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WorkoutExersiceId");
+                    b.HasIndex("WorkoutExerciseId");
 
                     b.ToTable("Sets");
                 });
@@ -377,30 +343,11 @@ namespace MyLiftLog.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyLiftLog.Data.Models.ExerciseMuscleGroup", b =>
-                {
-                    b.HasOne("MyLiftLog.Data.Models.Exercise", "Exercise")
-                        .WithMany("ExerciseMuscleGroups")
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MyLiftLog.Data.Models.MuscleGroup", "MuscleGroup")
-                        .WithMany("ExerciseMuscleGroups")
-                        .HasForeignKey("MuscleGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Exercise");
-
-                    b.Navigation("MuscleGroup");
-                });
-
             modelBuilder.Entity("MyLiftLog.Data.Models.Set", b =>
                 {
                     b.HasOne("MyLiftLog.Data.Models.WorkoutExercise", "WorkoutExercise")
                         .WithMany("Sets")
-                        .HasForeignKey("WorkoutExersiceId")
+                        .HasForeignKey("WorkoutExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -412,7 +359,7 @@ namespace MyLiftLog.Data.Migrations
                     b.HasOne("MyLiftLog.Data.Models.Exercise", "Exercise")
                         .WithMany("WorkoutExercises")
                         .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MyLiftLog.Data.Models.Workout", "Workout")
@@ -428,14 +375,7 @@ namespace MyLiftLog.Data.Migrations
 
             modelBuilder.Entity("MyLiftLog.Data.Models.Exercise", b =>
                 {
-                    b.Navigation("ExerciseMuscleGroups");
-
                     b.Navigation("WorkoutExercises");
-                });
-
-            modelBuilder.Entity("MyLiftLog.Data.Models.MuscleGroup", b =>
-                {
-                    b.Navigation("ExerciseMuscleGroups");
                 });
 
             modelBuilder.Entity("MyLiftLog.Data.Models.Workout", b =>
