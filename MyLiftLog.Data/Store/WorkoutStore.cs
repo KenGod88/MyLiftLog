@@ -54,6 +54,15 @@ namespace MyLiftLog.Data.Store
         public async Task<ActionResult<Workout>> GetWorkout(Guid id)
         {
             var workout = await _context.Workouts.FindAsync(id);
+            var workoutExercises = await _context.WorkoutExercises.Where(we => we.WorkoutId == id).ToListAsync();
+            foreach (var workoutExercise in workoutExercises)
+            {
+                var exercise = await _context.Exercises.FindAsync(workoutExercise.ExerciseId);
+                workoutExercise.Exercise = exercise;
+                var sets = await _context.Sets.Where(s => s.WorkoutExerciseId == workoutExercise.Id).ToListAsync();
+                workoutExercise.Sets = sets;
+            }
+            workout.WorkoutExercises = workoutExercises;
 
             if (workout == null)
             {
