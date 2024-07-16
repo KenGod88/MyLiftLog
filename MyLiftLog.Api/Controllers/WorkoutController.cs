@@ -57,25 +57,8 @@ namespace MyLiftLog.Api.Controllers
                     {
                         Name = inputExercise.Exercise.Name,
                         Description = inputExercise.Exercise.Description,
-                        ExerciseMuscleGroups = new List<ExerciseMuscleGroup>()
+                        MuscleGroup = inputExercise.Exercise.MuscleGroup 
                     };
-
-                    // Loop through each muscle group in the exercise
-                    foreach (var muscleGroup in inputExercise.Exercise.ExerciseMuscleGroups)
-                    {
-                        var muscleGroupEntity = new MuscleGroup
-                        {
-                            Name = muscleGroup.MuscleGroup.Name
-                        };
-
-                        var exerciseMuscleGroup = new ExerciseMuscleGroup
-                        {
-                            MuscleGroup = muscleGroupEntity
-                        };
-
-                        // Add muscle group to exercise
-                        exercise.ExerciseMuscleGroups.Add(exerciseMuscleGroup);
-                    }
 
                     // Create new WorkoutExercise
                     var workoutExercise = new WorkoutExercise
@@ -101,10 +84,10 @@ namespace MyLiftLog.Api.Controllers
                     newWorkout.WorkoutExercises.Add(workoutExercise);
                 }
 
-                // Save to database via _workoutStore
+                
                 var result = await _workoutStore.CreateWorkout(newWorkout);
 
-                // Return result
+                
                 return result;
             }
             catch (Exception ex)
@@ -132,6 +115,7 @@ namespace MyLiftLog.Api.Controllers
             return NoContent();
         }
     }
+
     public class WorkoutInputModel
     {
         public DateTime Date { get; set; }
@@ -149,17 +133,7 @@ namespace MyLiftLog.Api.Controllers
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<ExerciseMuscleGroupInputModel> ExerciseMuscleGroups { get; set; }
-    }
-
-    public class ExerciseMuscleGroupInputModel
-    {
-        public MuscleGroupInputModel MuscleGroup { get; set; }
-    }
-
-    public class MuscleGroupInputModel
-    {
-        public string Name { get; set; }
+        public MuscleGroup MuscleGroup { get; set; } // Use MuscleGroup enum directly
     }
 
     public class SetInputModel
@@ -168,4 +142,3 @@ namespace MyLiftLog.Api.Controllers
         public double Weight { get; set; }
     }
 }
-
