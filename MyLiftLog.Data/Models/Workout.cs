@@ -13,6 +13,9 @@ namespace MyLiftLog.Data.Models
         public Guid Id { get; set; }
 
         [Required]
+        public string Title { get; set; }
+
+        [Required]
         public DateTime Date { get; set; }
         public string Notes { get; set; }
         public List<WorkoutExercise> WorkoutExercises { get; set; }

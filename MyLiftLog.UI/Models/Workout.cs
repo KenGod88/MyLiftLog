@@ -12,6 +12,8 @@ namespace MyLiftLog.UI.Models
        
         public Guid Id { get; set; }
 
+        public string Title { get; set; }
+
         [Required]
         public DateTime Date { get; set; }
         public string Notes { get; set; }

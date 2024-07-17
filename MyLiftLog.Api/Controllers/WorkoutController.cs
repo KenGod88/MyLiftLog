@@ -44,6 +44,7 @@ namespace MyLiftLog.Api.Controllers
                 // Create new Workout
                 var newWorkout = new Workout
                 {
+                    Title = input.Title,
                     Date = input.Date,
                     Notes = input.Notes,
                     WorkoutExercises = new List<WorkoutExercise>()
@@ -118,6 +119,7 @@ namespace MyLiftLog.Api.Controllers
 
     public class WorkoutInputModel
     {
+        public string Title { get; set; }
         public DateTime Date { get; set; }
         public string Notes { get; set; }
         public List<WorkoutExerciseInputModel> WorkoutExercises { get; set; }
