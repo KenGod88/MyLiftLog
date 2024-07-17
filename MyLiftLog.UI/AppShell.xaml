@@ -7,9 +7,14 @@
     Shell.FlyoutBehavior="Disabled"
     Title="MyLiftLog.UI">
 
+
+
+
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+            
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+
+
 
 </Shell>

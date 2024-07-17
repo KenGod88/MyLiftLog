@@ -15,8 +15,12 @@ namespace MyLiftLog.UI
 
         public async Task<List<Workout>> GetAllWorkouts()
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync("https://localhost:7093/api/workout");
+            // Bypass SSL certificate validation for development purposes
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
+            var client = new HttpClient(handler);
+
+            var response = await client.GetAsync("https://10.0.2.2:7093/api/workout");
             Workouts = new List<Workout>();
             if (response.IsSuccessStatusCode)
             {
