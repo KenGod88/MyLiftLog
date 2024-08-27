@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace MyLiftLog.UI.Models
 {
-    public class Workout
+    public class Set
     {
-       
         public Guid Id { get; set; }
 
-        public string Title { get; set; }
+        
+        public Guid WorkoutExerciseId { get; set; }
 
-        [Required]
-        public DateTime Date { get; set; }
-        public string Notes { get; set; }
-        public List<WorkoutExercise> WorkoutExercises { get; set; }
+        public WorkoutExercise WorkoutExercise { get; set; }
 
+        public int Reps { get; set; }
+        public double Weight { get; set; }
     }
 }
