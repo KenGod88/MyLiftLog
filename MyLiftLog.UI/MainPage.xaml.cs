@@ -20,7 +20,7 @@ namespace MyLiftLog.UI
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
             var client = new HttpClient(handler);
 
-            var response = await client.GetAsync("https://10.0.2.2:7093/api/workout");
+            var response = await client.GetAsync("https://localhost:7093/api/workout");
             Workouts = new List<Workout>();
             if (response.IsSuccessStatusCode)
             {
@@ -31,13 +31,15 @@ namespace MyLiftLog.UI
             return Workouts;
         }
 
-        public void OnWorkoutSelected(object sender, SelectionChangedEventArgs e)
+        public async void OnWorkoutSelected(object sender, SelectionChangedEventArgs e)
         {
             var workout = e.CurrentSelection.FirstOrDefault() as Workout;
             if (workout != null)
             {
-                Navigation.PushAsync(new WorkoutDetailPage(workout));
+               await Navigation.PushAsync(new WorkoutDetailPage(workout));
             }
+
+            ((CollectionView)sender).SelectedItem = null;
         }
 
         protected override async void OnAppearing()

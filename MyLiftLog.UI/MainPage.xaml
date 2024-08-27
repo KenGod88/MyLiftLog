@@ -24,6 +24,7 @@
                 x:Name="WorkoutListView"
                 ItemsSource="{Binding Workouts}"
                 SelectionChanged="OnWorkoutSelected"
+                SelectionMode="Single"
                 HorizontalOptions="Center"
                 VerticalOptions="CenterAndExpand">
                 <CollectionView.ItemTemplate>
