@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyLiftLog.UI.SetDetailPage"
+             Title="Set Details">
+    <ScrollView>
+        <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25"
+        HorizontalOptions="Center">
+
+            <Label
+            Text="MyLiftLog"
+            Style="{StaticResource CenteredTitleStyle}" />
+
+            <Button
+    x:Name="BackButton"
+    Text="Back"
+    Style="{StaticResource ButtonStyle}"
+    Clicked="OnBackButtonClicked"
+    HorizontalOptions="Fill" />
+
+            <CollectionView
+            x:Name="SetListView"
+            ItemsSource="{Binding SetDetailes}"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                            Grid.Column="0"
+                            Text="{Binding .}"
+                            Style="{StaticResource TitleLabelStyle}" />
+                            
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
