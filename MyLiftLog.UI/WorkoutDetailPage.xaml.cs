@@ -5,12 +5,13 @@ namespace MyLiftLog.UI;
 
 public partial class WorkoutDetailPage : ContentPage
 {
-
     public List<Exercise> Exercises { get; set; }
+    public List<Set> Sets { get; set; }
 
     public WorkoutDetailPage(Workout workout)
     {
         InitializeComponent();
+        BindingContext = this;
         // Fetch exercises for the workout when the page is initialized
         LoadWorkoutDetails(workout.Id);
     }
@@ -29,7 +30,10 @@ public partial class WorkoutDetailPage : ContentPage
             var workout = JsonConvert.DeserializeObject<Workout>(content);
 
             // Extract exercises from workout data
-            Exercises = workout.WorkoutExercises.Select(we => we.Exercise).ToList();
+            Exercises = workout.WorkoutExercises.Select(we => new Exercise
+            {
+                Name = $"{we.Exercise.Name} - {we.Sets.Count} sets"
+            }).ToList();
 
             // Bind the data to the CollectionView
             ExerciseListView.ItemsSource = Exercises;
@@ -41,5 +45,16 @@ public partial class WorkoutDetailPage : ContentPage
         Navigation.PopAsync();
     }
 
+    private async void OnExerciseSelected(object sender, SelectionChangedEventArgs e)
+    {
+        var workout = e.CurrentSelection.FirstOrDefault() as Workout;
+        if (workout != null)
+        {
+            await Navigation.PushAsync(new SetDetailPage(workout));
+        }
 
+            ((CollectionView)sender).SelectedItem = null;
+
+       
+    }
 }
