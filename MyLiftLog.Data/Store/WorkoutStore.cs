@@ -47,7 +47,10 @@ namespace MyLiftLog.Data.Store
 
         public async Task<ActionResult<IEnumerable<Workout>>> GetAllWorkouts()
         {
-            var workouts = await _context.Workouts.ToListAsync();
+            var workouts = await _context.Workouts
+                .Include(w => w.WorkoutExercises)
+                .ThenInclude(we => we.Sets)
+                .ToListAsync();
             return new ActionResult<IEnumerable<Workout>>(workouts);
         }
 
